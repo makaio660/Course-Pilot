@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildDigest } from "@/lib/digestBuilder";
+import { CanvasApiError, normalizeCanvasBaseUrl } from "@/lib/canvas/CanvasClient";
 import { estimateDifficulty } from "@/lib/difficultyEstimator";
 import { calculatePointsBasedGrade, calculateWeightedGrade, calculateWhatIfGrade } from "@/lib/gradeCalculator";
 import { calculateAssignmentPriority } from "@/lib/priorityEngine";
@@ -84,5 +85,16 @@ describe("CoursePilot digests", () => {
     const digest = buildDigest(user, courses, assignments, submissions, currentDate, "MONTHLY");
     expect(digest.plainTextBody).toContain("Biology Midterm");
     expect(digest.plainTextBody).toContain("English Research Paper");
+  });
+});
+
+describe("Canvas website connector", () => {
+  it("normalizes school Canvas URLs to the website origin", () => {
+    expect(normalizeCanvasBaseUrl("canvas.csun.edu/courses/123")).toBe("https://canvas.csun.edu");
+    expect(normalizeCanvasBaseUrl("https://canvas.instructure.com/")).toBe("https://canvas.instructure.com");
+  });
+
+  it("rejects empty Canvas URLs", () => {
+    expect(() => normalizeCanvasBaseUrl(" ")).toThrow(CanvasApiError);
   });
 });

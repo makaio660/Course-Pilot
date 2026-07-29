@@ -1,3 +1,4 @@
+import { CanvasWebsiteLinker } from "@/components/CanvasWebsiteLinker";
 import { EmailReminderSettings } from "@/components/EmailReminderSettings";
 import { PageHeader, Section } from "@/components/ui";
 import { courses, submissions, user } from "@/lib/mockData";
@@ -23,11 +24,11 @@ export default function SettingsPage() {
             <label className="grid gap-1 text-sm">Preferred monthly digest day<input className="min-h-11 rounded-lg border border-slate-200 px-3 py-2" defaultValue={user.settings.monthlyDigestDay} /></label>
             <label className="grid gap-1 text-sm">Alert sensitivity<select className="min-h-11 rounded-lg border border-slate-200 px-3 py-2" defaultValue={user.settings.alertSensitivity}><option>low</option><option>normal</option><option>high</option></select></label>
             <label className="grid gap-1 text-sm">Minimum email importance threshold<input className="min-h-11 rounded-lg border border-slate-200 px-3 py-2" defaultValue={user.settings.emailImportanceThreshold} /></label>
-            <label className="grid gap-1 text-sm">Canvas base URL<input className="min-h-11 rounded-lg border border-slate-200 px-3 py-2" defaultValue={user.settings.canvasBaseUrl} /></label>
             <label className="grid gap-1 text-sm">Manual grade calculation preference<select className="min-h-11 rounded-lg border border-slate-200 px-3 py-2" defaultValue={user.settings.gradeCalculationPreference}><option>canvas</option><option>syllabus</option><option>coursepilot</option></select></label>
           </div>
         </Section>
         <div className="space-y-5">
+        <CanvasWebsiteLinker defaultCanvasBaseUrl={user.settings.canvasBaseUrl} />
         <EmailReminderSettings defaultEmail={user.email} weeklyDigest={weekly} monthlyDigest={monthly} />
         <Section title="Email automations">
           <div className="space-y-3">
