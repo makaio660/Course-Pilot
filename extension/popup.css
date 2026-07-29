@@ -1,0 +1,271 @@
+:root {
+  --ink: #1f2933;
+  --muted: #64748b;
+  --line: #d9e2ec;
+  --mist: #eef5f3;
+  --pine: #1f6f5b;
+  --amber: #f7c56b;
+  --coral: #de6b5f;
+  --sky: #d9ecff;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  width: 390px;
+  min-height: 560px;
+  color: var(--ink);
+  background: linear-gradient(180deg, #f7faf8 0%, #eef5f3 100%);
+}
+
+.shell {
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.eyebrow {
+  margin: 0 0 3px;
+  color: var(--pine);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.tagline {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.icon-button {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--pine);
+  background: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.canvas-card,
+.card,
+.grade-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 28px rgba(31, 41, 51, 0.08);
+}
+
+.canvas-card {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 14px 0;
+  padding: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.canvas-card span:nth-child(2) {
+  flex: 1;
+}
+
+.status-close {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.status-close:hover {
+  background: #eef5f3;
+  color: var(--ink);
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--amber);
+}
+
+.status-dot.is-live {
+  background: var(--pine);
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tab {
+  min-height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--muted);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.tab.is-active {
+  color: #fff;
+  border-color: var(--pine);
+  background: var(--pine);
+}
+
+.view {
+  display: grid;
+  gap: 10px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.card {
+  padding: 12px;
+}
+
+.card-header,
+.grade-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.course {
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.25;
+}
+
+.meta,
+.reason,
+.grade-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 9px;
+}
+
+.reason {
+  margin: 10px 0 0;
+}
+
+.open-link {
+  display: inline-flex;
+  margin-top: 10px;
+  border-radius: 7px;
+  background: #eef5f3;
+  color: var(--pine);
+  padding: 7px 9px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  border-radius: 6px;
+  padding: 4px 7px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.badge.green {
+  color: #047857;
+  background: #dff7eb;
+}
+
+.badge.amber {
+  color: #92400e;
+  background: #fff0bf;
+}
+
+.badge.red {
+  color: #be123c;
+  background: #ffe4e6;
+}
+
+.badge.blue {
+  color: #0369a1;
+  background: var(--sky);
+}
+
+.bar {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e5edf0;
+  margin-top: 10px;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--pine);
+}
+
+.grade-card {
+  padding: 12px;
+}
+
+.score {
+  margin: 4px 0 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.grade-state {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.grade-note {
+  margin: 8px 0 0;
+}

@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "CoursePilot",
+  "version": "0.1.0",
+  "description": "Know what matters before it becomes urgent.",
+  "icons": {
+    "128": "icon.svg"
+  },
+  "action": {
+    "default_title": "CoursePilot",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "permissions": ["storage", "activeTab", "tabs", "scripting", "alarms", "notifications"],
+  "host_permissions": ["https://*/*", "http://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

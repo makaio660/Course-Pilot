@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoursePilot</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="header">
+        <div>
+          <p class="eyebrow">CoursePilot</p>
+          <h1>Today’s focus</h1>
+          <p class="tagline">Know what matters before it becomes urgent.</p>
+        </div>
+        <button id="refresh" class="icon-button" title="Refresh Canvas scan" type="button">↻</button>
+      </header>
+
+      <section class="canvas-card" id="canvasStatus">
+        <span class="status-dot"></span>
+        <span>Open Canvas to let CoursePilot read visible assignment context.</span>
+      </section>
+
+      <nav class="tabs" aria-label="CoursePilot views">
+        <button class="tab is-active" data-view="focus" type="button">Focus</button>
+        <button class="tab" data-view="wins" type="button">Quick wins</button>
+        <button class="tab" data-view="grades" type="button">Grades</button>
+      </nav>
+
+      <section id="focusView" class="view"></section>
+      <section id="winsView" class="view is-hidden"></section>
+      <section id="gradesView" class="view is-hidden"></section>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

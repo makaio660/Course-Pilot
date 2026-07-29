@@ -1,0 +1,143 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                         String   @id @default(cuid())
+  name                       String
+  email                      String   @unique
+  timezone                   String
+  dailyDigestEnabled         Boolean  @default(true)
+  weeklyDigestEnabled        Boolean  @default(true)
+  monthlyDigestEnabled       Boolean  @default(true)
+  alertSensitivity           String   @default("normal")
+  courses                    Course[]
+  submissions                Submission[]
+  emailDigests               EmailDigest[]
+  canvasAccounts             CanvasAccount[]
+}
+
+model CanvasAccount {
+  id                    String   @id @default(cuid())
+  userId                String
+  canvasBaseUrl         String
+  accessTokenEncrypted  String
+  refreshTokenEncrypted String?
+  tokenExpiresAt        DateTime?
+  user                  User     @relation(fields: [userId], references: [id])
+}
+
+model Course {
+  id                    String   @id @default(cuid())
+  userId                String
+  canvasCourseId        String?
+  name                  String
+  courseCode            String
+  termName              String
+  syllabusText          String?
+  gradingMode           String
+  officialCurrentScore  Float?
+  officialCurrentGrade  String?
+  estimatedCurrentScore Float?
+  finalGradesHidden     Boolean  @default(false)
+  lastSyncedAt          DateTime?
+  user                  User     @relation(fields: [userId], references: [id])
+  assignmentGroups      AssignmentGroup[]
+  assignments           Assignment[]
+  syllabusEvents        SyllabusEvent[]
+}
+
+model AssignmentGroup {
+  id                       String   @id @default(cuid())
+  courseId                 String
+  canvasAssignmentGroupId  String?
+  name                     String
+  weight                   Float?
+  dropLowest               Int?
+  dropHighest              Int?
+  course                   Course   @relation(fields: [courseId], references: [id])
+  assignments              Assignment[]
+}
+
+model Assignment {
+  id                 String   @id @default(cuid())
+  courseId           String
+  assignmentGroupId  String
+  canvasAssignmentId String?
+  name               String
+  description        String?
+  dueAt              DateTime
+  unlockAt           DateTime?
+  lockAt             DateTime?
+  pointsPossible     Float
+  submissionTypes    String[]
+  gradingType        String
+  assignmentType     String
+  isMajor            Boolean  @default(false)
+  difficultyLevel    String
+  estimatedMinutes   Int
+  priorityScore      Int
+  alertLevel         String
+  importanceReason   String
+  htmlUrl            String?
+  lastSyncedAt       DateTime?
+  omitFromFinalGrade Boolean  @default(false)
+  course             Course   @relation(fields: [courseId], references: [id])
+  assignmentGroup    AssignmentGroup @relation(fields: [assignmentGroupId], references: [id])
+  submissions        Submission[]
+  taskPlans          TaskPlan[]
+}
+
+model Submission {
+  id            String   @id @default(cuid())
+  assignmentId  String
+  userId        String
+  submittedAt   DateTime?
+  score         Float?
+  grade         String?
+  workflowState String
+  late          Boolean  @default(false)
+  missing       Boolean  @default(false)
+  excused       Boolean  @default(false)
+  assignment    Assignment @relation(fields: [assignmentId], references: [id])
+  user          User       @relation(fields: [userId], references: [id])
+}
+
+model SyllabusEvent {
+  id                  String   @id @default(cuid())
+  courseId            String
+  title               String
+  eventType           String
+  date                DateTime
+  estimatedImportance Int
+  sourceText          String
+  confidence          String
+  course              Course   @relation(fields: [courseId], references: [id])
+}
+
+model TaskPlan {
+  id              String   @id @default(cuid())
+  assignmentId    String
+  title           String
+  dueAt           DateTime
+  estimatedMinutes Int
+  status          String
+  generatedReason String
+  assignment      Assignment @relation(fields: [assignmentId], references: [id])
+}
+
+model EmailDigest {
+  id            String   @id @default(cuid())
+  userId        String
+  digestType    String
+  subject       String
+  htmlBody      String
+  plainTextBody String
+  sentAt        DateTime?
+  user          User     @relation(fields: [userId], references: [id])
+}

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CoursePilot Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <p>CoursePilot</p>
+        <h1>Extension settings</h1>
+      </header>
+
+      <section class="panel">
+        <div class="linked-status" id="linkedStatus">
+          Canvas account has not been detected yet. Open Canvas and click the CoursePilot extension.
+        </div>
+        <label>
+          Canvas base URL
+          <input id="canvasBaseUrl" value="https://school.instructure.com" />
+        </label>
+        <label>
+          Alert sensitivity
+          <select id="alertSensitivity">
+            <option value="low">Low</option>
+            <option value="normal" selected>Normal</option>
+            <option value="high">High</option>
+          </select>
+        </label>
+        <label>
+          Minimum importance for notifications
+          <input id="importanceThreshold" type="number" min="0" max="100" value="45" />
+        </label>
+        <label class="check">
+          <input id="dailyDigest" type="checkbox" checked />
+          Daily digest preview
+        </label>
+        <label class="check">
+          <input id="weeklyDigestEnabled" type="checkbox" checked />
+          Weekly overview email reminder
+        </label>
+        <label>
+          Send overview to
+          <input id="digestEmailAddress" type="email" placeholder="you@example.com" />
+        </label>
+        <label>
+          Weekly overview day
+          <select id="weeklyDigestDay">
+            <option>Sunday</option>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+          </select>
+        </label>
+        <label>
+          Weekly overview time
+          <input id="weeklyDigestTime" value="7:30 AM" />
+        </label>
+        <label class="check">
+          <input id="countMissing" type="checkbox" checked />
+          Count missing past-due assignments as zero in estimates
+        </label>
+        <div class="button-row">
+          <button id="save" type="button">Save settings</button>
+          <button id="openWeeklyDraft" type="button" class="secondary">Open weekly email draft</button>
+        </div>
+        <p id="status" class="status"></p>
+      </section>
+
+      <section class="panel">
+        <h2>Email delivery note</h2>
+        <p>The extension can schedule the weekly overview and prepare the rundown from Canvas. Fully automatic sending needs a Gmail/OAuth backend; until then, the reminder opens a ready-to-send email draft flow instead of silently sending from your account.</p>
+      </section>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>
